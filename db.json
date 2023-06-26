@@ -1,0 +1,68 @@
+{
+  "coffees": [
+    {
+      "id": "1",
+      "name": "Expresso Tradicional",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+      "value": 7.5,
+      "type": ["Tradicional"],
+      "img": "expresso-tradicional"
+    },
+    {
+      "id": "2",
+      "name": "Expresso Americano",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+      "value": 11.9,
+      "type": ["Tradicional"],
+      "img": "expresso-americano"
+    },
+    {
+      "id": "3",
+      "name": "Expresso Cremoso",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+      "value": 8.88,
+      "type": ["Tradicional"],
+      "img": "expresso-cremoso"
+    },
+    {
+      "id": "4",
+      "name": "Expresso Gelado",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+      "value": 7.88,
+      "type": ["Tradicional", "Gelado"],
+      "img": "expresso-gelado"
+    },
+    {
+      "id": "5",
+      "name": "Café com Leite",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+      "value": 5.88,
+      "type": ["Tradicional", "Com leite"],
+      "img": "cafe-com-leite"
+    },
+    {
+      "id": "6",
+      "name": "Latte",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+      "value": 6.88,
+      "type": ["Tradicional", "Com leite"],
+      "img": "latte"
+    },
+    {
+      "id": "7",
+      "name": "Capuccino",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+      "value": 10.88,
+      "type": ["Tradicional", "Com leite"],
+      "img": "capuccino"
+    },
+    {
+      "id": "8",
+      "name": "Macchiato",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+      "value": 11.88,
+      "type": ["Tradicional", "Com leite"],
+      "img": "macchiato"
+    }
+  ]
+}

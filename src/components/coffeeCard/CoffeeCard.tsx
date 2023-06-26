@@ -2,56 +2,53 @@ import { Add, AddShoppingCart, Remove } from "@mui/icons-material";
 import {
   CardInfoContainer,
   CoffeeCardContainer,
+  CoffeeTagsContainer,
   CoffeeValueContainer,
   IncrementDecrementContainer,
 } from "./styles";
 import { IconButton } from "@mui/material";
-import { useState } from "react";
-
-type CoffeTypes = "expresso" | "expressoCremoso" | "mochaccino";
+import { useContext, useState } from "react";
+import { ShoppingCartContext } from "../../context/ShoppingCartContext";
+import { ICoffee } from "../../context/CoffeeContext";
 
 interface ICoffeeCardProps {
-  coffeeType: CoffeTypes;
+  coffeeData: ICoffee;
 }
 
-interface ICoffeeTypes {
-  expresso: string;
-  expressoCremoso: string;
-  mochaccino: string;
-}
-
-export function CoffeeCard({ coffeeType }: ICoffeeCardProps) {
-  const coffeeTypes: ICoffeeTypes = {
-    expresso: `${import.meta.env.BASE_URL}src/assets/expresso.png`,
-    expressoCremoso: `${
-      import.meta.env.BASE_URL
-    }src/assets/expresso-cremoso.png`,
-    mochaccino: `${import.meta.env.BASE_URL}src/assets/mochaccino.png`,
-  };
-
-  const [quantity, setQuantity] = useState(0);
+export function CoffeeCard({ coffeeData }: ICoffeeCardProps) {
+  const [coffeeQuantity, setCoffeeQuantity] = useState(0);
+  const { addItemToCart } = useContext(ShoppingCartContext);
 
   function handleCoffeeQuantity(isIncrement: boolean) {
     if (isIncrement) {
-      setQuantity((state) => (state += 1));
-    } else if (quantity > 0) {
-      setQuantity((state) => (state -= 1));
+      setCoffeeQuantity((state) => (state += 1));
+    } else if (coffeeQuantity > 0) {
+      setCoffeeQuantity((state) => (state -= 1));
     }
   }
 
   return (
     <CoffeeCardContainer>
-      <img src={coffeeTypes[coffeeType as keyof ICoffeeTypes]} />
-      <span>Tradicional</span>
+      <img
+        src={`${import.meta.env.BASE_URL}src/assets/${coffeeData.img}.png`}
+      />
+
+      <CoffeeTagsContainer>
+        {coffeeData.type
+          ? coffeeData.type.map((type: string) => {
+              return <span key={type}>{type}</span>;
+            })
+          : null}
+      </CoffeeTagsContainer>
 
       <div>
-        <strong>Expresso Tradicional</strong>
-        <p>O tradicional café feito com água quente e grãos moídos</p>
+        <strong>{coffeeData.name}</strong>
+        <p>{coffeeData.description}</p>
       </div>
 
       <CardInfoContainer>
         <CoffeeValueContainer>
-          R$ <strong>9,90</strong>
+          R$ <strong>{coffeeData.value}</strong>
         </CoffeeValueContainer>
         <div>
           <IncrementDecrementContainer>
@@ -61,7 +58,7 @@ export function CoffeeCard({ coffeeType }: ICoffeeCardProps) {
             >
               <Remove />
             </IconButton>
-            <span>{quantity}</span>
+            <span>{coffeeQuantity}</span>
             <IconButton
               title="Aumentar quantidade"
               onClick={() => handleCoffeeQuantity(true)}
@@ -76,6 +73,15 @@ export function CoffeeCard({ coffeeType }: ICoffeeCardProps) {
               "&:hover": { backgroundColor: "#bc8062" },
             }}
             title="Adicionar ao carrinho"
+            onClick={() => {
+              if (coffeeQuantity > 0) {
+                addItemToCart({ ...coffeeData, quantity: coffeeQuantity });
+              } else {
+                alert(
+                  "Selecione quantos cafés você gostaria de adicionar ao carrinho."
+                );
+              }
+            }}
           >
             <AddShoppingCart />
           </IconButton>

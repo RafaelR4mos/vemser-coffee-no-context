@@ -6,11 +6,19 @@ import {
   CoffeesContainer,
   CustomButton,
 } from "./styles";
-import { CoffeeCard } from "../../components/coffeeCard/CoffeeCard";
+import { CoffeeCard } from "../../components/CoffeeCard/CoffeeCard";
 import { DefaultPageLayoutContainer } from "../styles";
-import { Button } from "@mui/material";
+import { useContext, useEffect } from "react";
+import { CoffeeContext } from "../../context/CoffeeContext";
 
 export function Home() {
+  const { getCoffee, coffeeList } = useContext(CoffeeContext);
+
+  useEffect(() => {
+    getCoffee();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
       <Header />
@@ -36,14 +44,13 @@ export function Home() {
         <CoffeeSection id="coffees">
           <h2>Nossos melhores cafés</h2>
           <CoffeesContainer>
-            <CoffeeCard coffeeType="expresso" />
-            <CoffeeCard coffeeType="expressoCremoso" />
-            <CoffeeCard coffeeType="mochaccino" />
-            <CoffeeCard coffeeType="expressoCremoso" />
-            <CoffeeCard coffeeType="mochaccino" />
-            <CoffeeCard coffeeType="expresso" />
-            <CoffeeCard coffeeType="mochaccino" />
-            <CoffeeCard coffeeType="mochaccino" />
+            {coffeeList ? (
+              coffeeList.map((coffee) => (
+                <CoffeeCard key={coffee.id} coffeeData={coffee} />
+              ))
+            ) : (
+              <h2>Nenhum café encontrado</h2>
+            )}
           </CoffeesContainer>
         </CoffeeSection>
       </DefaultPageLayoutContainer>

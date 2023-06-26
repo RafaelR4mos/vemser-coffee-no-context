@@ -35,13 +35,17 @@ export const CustomButton = styled.button`
 `;
 
 export const CoffeeSection = styled.section`
+  padding: 8rem 0 0;
   h2 {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.4rem;
+    text-align: center;
   }
 `;
 
 export const CoffeesContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   gap: 2rem;
 `;

@@ -7,4 +7,5 @@ export const defaultTheme = {
   background: "#fdfcfb",
   accent: "#bc8062",
   baseBtn: "#E6E5E5",
+  baseCard: "#F3F2F2",
 };
