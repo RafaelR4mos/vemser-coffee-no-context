@@ -7,6 +7,14 @@ export const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
 ul {
   list-style: none;
 }
@@ -20,7 +28,6 @@ body {
   font-family: "Inter", sans-serif;
   font-size: 1.125rem;
   line-height: 1.6;
-  padding: 0 10rem;
 }
 
 

@@ -1,4 +1,12 @@
-import { CoffeeCardContainer } from "./styles";
+import { Add, AddShoppingCart, Remove } from "@mui/icons-material";
+import {
+  CardInfoContainer,
+  CoffeeCardContainer,
+  CoffeeValueContainer,
+  IncrementDecrementContainer,
+} from "./styles";
+import { IconButton } from "@mui/material";
+import { useState } from "react";
 
 type CoffeTypes = "expresso" | "expressoCremoso" | "mochaccino";
 
@@ -21,6 +29,16 @@ export function CoffeeCard({ coffeeType }: ICoffeeCardProps) {
     mochaccino: `${import.meta.env.BASE_URL}src/assets/mochaccino.png`,
   };
 
+  const [quantity, setQuantity] = useState(0);
+
+  function handleCoffeeQuantity(isIncrement: boolean) {
+    if (isIncrement) {
+      setQuantity((state) => (state += 1));
+    } else if (quantity > 0) {
+      setQuantity((state) => (state -= 1));
+    }
+  }
+
   return (
     <CoffeeCardContainer>
       <img src={coffeeTypes[coffeeType as keyof ICoffeeTypes]} />
@@ -31,13 +49,38 @@ export function CoffeeCard({ coffeeType }: ICoffeeCardProps) {
         <p>O tradicional café feito com água quente e grãos moídos</p>
       </div>
 
-      <div>
-        <span>
+      <CardInfoContainer>
+        <CoffeeValueContainer>
           R$ <strong>9,90</strong>
-        </span>
-        <button>1</button>
-        <button>carrinho</button>
-      </div>
+        </CoffeeValueContainer>
+        <div>
+          <IncrementDecrementContainer>
+            <IconButton
+              title="Diminuir quantidade"
+              onClick={() => handleCoffeeQuantity(false)}
+            >
+              <Remove />
+            </IconButton>
+            <span>{quantity}</span>
+            <IconButton
+              title="Aumentar quantidade"
+              onClick={() => handleCoffeeQuantity(true)}
+            >
+              <Add />
+            </IconButton>
+          </IncrementDecrementContainer>
+          <IconButton
+            sx={{
+              backgroundColor: "#b47150",
+              color: "#FFF",
+              "&:hover": { backgroundColor: "#bc8062" },
+            }}
+            title="Adicionar ao carrinho"
+          >
+            <AddShoppingCart />
+          </IconButton>
+        </div>
+      </CardInfoContainer>
     </CoffeeCardContainer>
   );
 }

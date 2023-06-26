@@ -1,3 +1,13 @@
+import { Header } from "../../components/Header/Header";
+import { DefaultPageLayoutContainer } from "../styles";
+
 export function Checkout() {
-  return <h1>Checkout</h1>;
+  return (
+    <>
+      <Header />
+      <DefaultPageLayoutContainer>
+        <h1>Checkout</h1>
+      </DefaultPageLayoutContainer>
+    </>
+  );
 }
