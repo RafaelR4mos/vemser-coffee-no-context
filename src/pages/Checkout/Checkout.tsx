@@ -85,7 +85,7 @@ export function Checkout() {
                   return (
                     <SelectedCoffee key={coffee.id}>
                       <img
-                        src={`${import.meta.env.BASE_URL}src/assets/${
+                        src={`${import.meta.env.BASE_URL}public/${
                           coffee.img
                         }.png`}
                       />
