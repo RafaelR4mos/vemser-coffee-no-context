@@ -1,5 +1,5 @@
 import { Header } from "../../components/Header/Header";
-import coffeeImg from "../../assets/xicara-cafe.png";
+import coffeeImg from "../../../public/xicara-cafe.png";
 import {
   BigHeroSection,
   CoffeeSection,
