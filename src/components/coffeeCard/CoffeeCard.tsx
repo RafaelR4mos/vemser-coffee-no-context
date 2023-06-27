@@ -30,7 +30,11 @@ export function CoffeeCard({ coffeeData }: ICoffeeCardProps) {
   return (
     <CoffeeCardContainer>
       <img
-        src={`${import.meta.env.BASE_URL}src/assets/${coffeeData.img}.png`}
+        src={
+          import.meta.env.PROD
+            ? `${import.meta.env.BASE_URL}/assets/${coffeeData.img}.png`
+            : `${import.meta.env.BASE_URL}src/assets/${coffeeData.img}.png`
+        }
       />
 
       <CoffeeTagsContainer>
