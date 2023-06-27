@@ -6,7 +6,7 @@ import {
   CoffeesContainer,
   CustomButton,
 } from "./styles";
-import { CoffeeCard } from "../../components/CoffeeCard/CoffeeCard";
+import { CoffeeCard } from "../../components/coffeeCard/CoffeeCard";
 import { DefaultPageLayoutContainer } from "../styles";
 import { useContext, useEffect } from "react";
 import { CoffeeContext } from "../../context/CoffeeContext";

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { IncrementDecrementContainer } from "../../components/CoffeeCard/styles";
+import { IncrementDecrementContainer } from "../../components/coffeeCard/styles";
 
 export const CheckoutPageContainer = styled.div`
   display: grid;
