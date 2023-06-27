@@ -9,7 +9,12 @@ interface ICartItem extends ICoffee {
 interface IShoppingCart {
   shoppingCartList: ICartItem[] | [];
   addItemToCart: (item: ICartItem) => void;
-  removeItemFromCart: (idItemToRemove: string) => void;
+  removeItemFromCart: (idItemToRemove: number) => void;
+  updateCoffeeQuantity: (
+    idItemToUpdate: number,
+    newQuantity: number,
+    isIncrementQuantity: boolean
+  ) => void;
 }
 
 export const ShoppingCartContext = createContext({} as IShoppingCart);
@@ -23,7 +28,30 @@ export function ShoppingCartProvider({ children }: IChildren) {
     setShoppingCartList((state) => [...state, item]);
   }
 
-  function removeItemFromCart(idItemToRemove: string) {
+  function updateCoffeeQuantity(
+    idItemToUpdate: number,
+
+    newQuantity: number,
+    isIncrementQuantity: boolean
+  ) {
+    setShoppingCartList((state) =>
+      state.map((coffee) => {
+        if (coffee.id === idItemToUpdate) {
+          if (isIncrementQuantity) {
+            return { ...coffee, quantity: (newQuantity += 1) };
+          } else {
+            return coffee.quantity > 0
+              ? { ...coffee, quantity: (newQuantity -= 1) }
+              : coffee;
+          }
+        } else {
+          return coffee;
+        }
+      })
+    );
+  }
+
+  function removeItemFromCart(idItemToRemove: number) {
     setShoppingCartList((state) =>
       state.filter((item) => idItemToRemove !== item.id)
     );
@@ -35,7 +63,12 @@ export function ShoppingCartProvider({ children }: IChildren) {
 
   return (
     <ShoppingCartContext.Provider
-      value={{ shoppingCartList, addItemToCart, removeItemFromCart }}
+      value={{
+        addItemToCart,
+        shoppingCartList,
+        removeItemFromCart,
+        updateCoffeeQuantity,
+      }}
     >
       {children}
     </ShoppingCartContext.Provider>

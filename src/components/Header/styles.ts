@@ -9,6 +9,7 @@ export const HeaderContainer = styled.header`
   top: 0;
   background-color: ${(props) => props.theme.secondary};
   padding: 0 10rem;
+  z-index: 9;
 
   & > div {
     display: flex;

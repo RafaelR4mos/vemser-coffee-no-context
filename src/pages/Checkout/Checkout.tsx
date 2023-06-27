@@ -17,7 +17,8 @@ import { Add, DeleteOutlineOutlined, Remove } from "@mui/icons-material";
 import { ShoppingCartContext } from "../../context/ShoppingCartContext";
 
 export function Checkout() {
-  const { shoppingCartList } = useContext(ShoppingCartContext);
+  const { shoppingCartList, removeItemFromCart, updateCoffeeQuantity } =
+    useContext(ShoppingCartContext);
 
   return (
     <>
@@ -92,11 +93,29 @@ export function Checkout() {
                         <CoffeeTitle>{coffee.name}</CoffeeTitle>
                         <ActionsContainer>
                           <CheckoutButtonContainer>
-                            <IconButton title="Diminuir quantidade">
+                            <IconButton
+                              title="Diminuir quantidade"
+                              onClick={() =>
+                                updateCoffeeQuantity(
+                                  coffee.id,
+                                  coffee.quantity,
+                                  false
+                                )
+                              }
+                            >
                               <Remove />
                             </IconButton>
                             <span>{coffee.quantity}</span>
-                            <IconButton title="Aumentar quantidade">
+                            <IconButton
+                              title="Aumentar quantidade"
+                              onClick={() =>
+                                updateCoffeeQuantity(
+                                  coffee.id,
+                                  coffee.quantity,
+                                  true
+                                )
+                              }
+                            >
                               <Add />
                             </IconButton>
                           </CheckoutButtonContainer>
@@ -104,6 +123,7 @@ export function Checkout() {
                             <Button
                               startIcon={<DeleteOutlineOutlined />}
                               sx={{ color: "#000" }}
+                              onClick={() => removeItemFromCart(coffee.id)}
                             >
                               Remover
                             </Button>
@@ -128,6 +148,8 @@ export function Checkout() {
                     <strong>Total</strong>
                     <strong>R$ 33,20</strong>
                   </span>
+
+                  <ConfirmButton>Confirmar pedido!</ConfirmButton>
                 </TotalContainer>
               </>
             ) : (

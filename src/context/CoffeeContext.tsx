@@ -7,7 +7,7 @@ interface ICoffeeContext {
 }
 
 export interface ICoffee {
-  id: string;
+  id: number;
   name: string;
   description: string;
   value: number;
