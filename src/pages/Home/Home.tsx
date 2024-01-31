@@ -7,8 +7,19 @@ import {
   CustomButton,
 } from './styles'
 import { DefaultPageLayoutContainer } from '../styles'
+import { useContext, useEffect } from 'react'
+import { CoffeeContext } from '../../context/CoffeeContext'
+import { CoffeeCard } from '../../components/coffeeCard/CoffeeCard'
 
 export function Home() {
+  const { coffeeData, getAllCoffees } = useContext(CoffeeContext)
+
+  useEffect(() => {
+    getAllCoffees()
+  }, [])
+
+  console.log(coffeeData)
+
   return (
     <>
       <Header />
@@ -34,7 +45,13 @@ export function Home() {
         <CoffeeSection id="coffees">
           <h2>Nossos melhores cafés</h2>
           <CoffeesContainer>
-            <h2>Nenhum café encontrado</h2>
+            {coffeeData ? (
+              coffeeData?.map((coffee) => {
+                return <CoffeeCard key={coffee.id} coffeeData={coffee} />
+              })
+            ) : (
+              <h2>Nenhum café encontrado!</h2>
+            )}
           </CoffeesContainer>
         </CoffeeSection>
       </DefaultPageLayoutContainer>

@@ -7,14 +7,17 @@ import {
   IncrementDecrementContainer,
 } from './styles'
 import { IconButton } from '@mui/material'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { ICoffee } from '../../utils/interface'
+import { ShoppingCartContext } from '../../context/ShoppingCartContext'
 
 interface ICoffeeCardProps {
-  coffeeData: any
+  coffeeData: ICoffee
 }
 
 export function CoffeeCard({ coffeeData }: ICoffeeCardProps) {
   const [coffeeQuantity, setCoffeeQuantity] = useState(0)
+  const { addProductToCart } = useContext(ShoppingCartContext)
 
   function handleCoffeeQuantity(isIncrement: boolean) {
     if (isIncrement) {
@@ -67,7 +70,14 @@ export function CoffeeCard({ coffeeData }: ICoffeeCardProps) {
               color: '#FFF',
               '&:hover': { backgroundColor: '#bc8062' },
             }}
+            disabled={coffeeQuantity === 0}
             title="Adicionar ao carrinho"
+            onClick={() =>
+              addProductToCart({
+                ...coffeeData,
+                quantity: coffeeQuantity,
+              })
+            }
           >
             <AddShoppingCart />
           </IconButton>
