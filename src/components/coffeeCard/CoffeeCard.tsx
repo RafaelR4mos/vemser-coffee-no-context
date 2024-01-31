@@ -1,29 +1,26 @@
-import { Add, AddShoppingCart, Remove } from "@mui/icons-material";
+import { Add, AddShoppingCart, Remove } from '@mui/icons-material'
 import {
   CardInfoContainer,
   CoffeeCardContainer,
   CoffeeTagsContainer,
   CoffeeValueContainer,
   IncrementDecrementContainer,
-} from "./styles";
-import { IconButton } from "@mui/material";
-import { useContext, useState } from "react";
-import { ShoppingCartContext } from "../../context/ShoppingCartContext";
-import { ICoffee } from "../../context/CoffeeContext";
+} from './styles'
+import { IconButton } from '@mui/material'
+import { useState } from 'react'
 
 interface ICoffeeCardProps {
-  coffeeData: ICoffee;
+  coffeeData: any
 }
 
 export function CoffeeCard({ coffeeData }: ICoffeeCardProps) {
-  const [coffeeQuantity, setCoffeeQuantity] = useState(0);
-  const { addItemToCart } = useContext(ShoppingCartContext);
+  const [coffeeQuantity, setCoffeeQuantity] = useState(0)
 
   function handleCoffeeQuantity(isIncrement: boolean) {
     if (isIncrement) {
-      setCoffeeQuantity((state) => (state += 1));
+      setCoffeeQuantity((state) => (state += 1))
     } else if (coffeeQuantity > 0) {
-      setCoffeeQuantity((state) => (state -= 1));
+      setCoffeeQuantity((state) => (state -= 1))
     }
   }
 
@@ -34,7 +31,7 @@ export function CoffeeCard({ coffeeData }: ICoffeeCardProps) {
       <CoffeeTagsContainer>
         {coffeeData.type
           ? coffeeData.type.map((type: string) => {
-              return <span key={type}>{type}</span>;
+              return <span key={type}>{type}</span>
             })
           : null}
       </CoffeeTagsContainer>
@@ -66,25 +63,16 @@ export function CoffeeCard({ coffeeData }: ICoffeeCardProps) {
           </IncrementDecrementContainer>
           <IconButton
             sx={{
-              backgroundColor: "#b47150",
-              color: "#FFF",
-              "&:hover": { backgroundColor: "#bc8062" },
+              backgroundColor: '#b47150',
+              color: '#FFF',
+              '&:hover': { backgroundColor: '#bc8062' },
             }}
             title="Adicionar ao carrinho"
-            onClick={() => {
-              if (coffeeQuantity > 0) {
-                addItemToCart({ ...coffeeData, quantity: coffeeQuantity });
-              } else {
-                alert(
-                  "Selecione quantos cafés você gostaria de adicionar ao carrinho."
-                );
-              }
-            }}
           >
             <AddShoppingCart />
           </IconButton>
         </div>
       </CardInfoContainer>
     </CoffeeCardContainer>
-  );
+  )
 }

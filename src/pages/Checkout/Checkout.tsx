@@ -1,6 +1,5 @@
-import { Button, IconButton, TextField } from "@mui/material";
-import { Header } from "../../components/Header/Header";
-import { useContext } from "react";
+import { Button, IconButton, TextField } from '@mui/material'
+import { Header } from '../../components/Header/Header'
 import {
   ActionsContainer,
   CheckoutButtonContainer,
@@ -12,13 +11,11 @@ import {
   SelectedCoffee,
   SelectedCoffeeContainer,
   TotalContainer,
-} from "./styles";
-import { Add, DeleteOutlineOutlined, Remove } from "@mui/icons-material";
-import { ShoppingCartContext } from "../../context/ShoppingCartContext";
+} from './styles'
+import { Add, DeleteOutlineOutlined, Remove } from '@mui/icons-material'
 
 export function Checkout() {
-  const { shoppingCartList, removeItemFromCart, updateCoffeeQuantity } =
-    useContext(ShoppingCartContext);
+  const isCoffeeSelected = true
 
   return (
     <>
@@ -35,42 +32,42 @@ export function Checkout() {
                 label="CEP"
                 placeholder="CEP"
                 required
-                sx={{ width: "40%" }}
+                sx={{ width: '40%' }}
               />
               <TextField
                 label="Rua"
                 placeholder="Rua"
                 required
-                sx={{ width: "100%" }}
+                sx={{ width: '100%' }}
               />
               <TextField
                 label="Número"
                 placeholder="Número"
                 required
-                sx={{ width: "40%" }}
+                sx={{ width: '40%' }}
               />
               <TextField
                 label="Complemento"
                 placeholder="Complemento"
-                sx={{ width: "calc(60% - 0.75rem)" }}
+                sx={{ width: 'calc(60% - 0.75rem)' }}
               />
               <TextField
                 label="Bairro"
                 placeholder="Bairro"
                 required
-                sx={{ width: "calc(44% - 0.75rem)" }}
+                sx={{ width: 'calc(44% - 0.75rem)' }}
               />
               <TextField
                 label="Cidade"
                 placeholder="Cidade"
                 required
-                sx={{ width: "calc(44% - 0.75rem)" }}
+                sx={{ width: 'calc(44% - 0.75rem)' }}
               />
               <TextField
                 label="UF"
                 placeholder="UF"
                 required
-                sx={{ width: "12%" }}
+                sx={{ width: '12%' }}
               />
             </form>
           </div>
@@ -79,61 +76,38 @@ export function Checkout() {
         <div>
           <h2>Cafés selecionados</h2>
           <SelectedCoffeeContainer>
-            {shoppingCartList.length > 0 ? (
+            {isCoffeeSelected ? (
               <>
-                {shoppingCartList.map((coffee) => {
-                  return (
-                    <SelectedCoffee key={coffee.id}>
-                      <img
-                        src={`${import.meta.env.BASE_URL}public/${
-                          coffee.img
-                        }.png`}
-                      />
-                      <div>
-                        <CoffeeTitle>{coffee.name}</CoffeeTitle>
-                        <ActionsContainer>
-                          <CheckoutButtonContainer>
-                            <IconButton
-                              title="Diminuir quantidade"
-                              onClick={() =>
-                                updateCoffeeQuantity(
-                                  coffee.id,
-                                  coffee.quantity,
-                                  false
-                                )
-                              }
-                            >
-                              <Remove />
-                            </IconButton>
-                            <span>{coffee.quantity}</span>
-                            <IconButton
-                              title="Aumentar quantidade"
-                              onClick={() =>
-                                updateCoffeeQuantity(
-                                  coffee.id,
-                                  coffee.quantity,
-                                  true
-                                )
-                              }
-                            >
-                              <Add />
-                            </IconButton>
-                          </CheckoutButtonContainer>
-                          <CheckoutButtonContainer>
-                            <Button
-                              startIcon={<DeleteOutlineOutlined />}
-                              sx={{ color: "#000" }}
-                              onClick={() => removeItemFromCart(coffee.id)}
-                            >
-                              Remover
-                            </Button>
-                          </CheckoutButtonContainer>
-                        </ActionsContainer>
-                      </div>
-                      <CoffeeValue>{`R$ ${coffee.value}`}</CoffeeValue>
-                    </SelectedCoffee>
-                  );
-                })}
+                <SelectedCoffee>
+                  <img
+                    src={`${
+                      import.meta.env.BASE_URL
+                    }public/expresso-tradicional.png`}
+                  />
+                  <div>
+                    <CoffeeTitle>Nome café</CoffeeTitle>
+                    <ActionsContainer>
+                      <CheckoutButtonContainer>
+                        <IconButton title="Diminuir quantidade">
+                          <Remove />
+                        </IconButton>
+                        <span>2</span>
+                        <IconButton title="Aumentar quantidade">
+                          <Add />
+                        </IconButton>
+                      </CheckoutButtonContainer>
+                      <CheckoutButtonContainer>
+                        <Button
+                          startIcon={<DeleteOutlineOutlined />}
+                          sx={{ color: '#000' }}
+                        >
+                          Remover
+                        </Button>
+                      </CheckoutButtonContainer>
+                    </ActionsContainer>
+                  </div>
+                  <CoffeeValue>{`R$ 00,00`}</CoffeeValue>
+                </SelectedCoffee>
 
                 <TotalContainer>
                   <span>
@@ -159,5 +133,5 @@ export function Checkout() {
         </div>
       </CheckoutPageContainer>
     </>
-  );
+  )
 }
